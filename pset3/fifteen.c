@@ -18,7 +18,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
+#include <time.h>
 // constants
 #define DIM_MIN 3
 #define DIM_MAX 9
@@ -156,7 +156,38 @@ void greet(void)
  */
 void init(void)
 {
-    // TODO
+    int random=0;
+    int Limit;
+    bool sovpadeniy;
+    Limit=d*d-1;
+
+    srand(time(NULL));
+    
+    for (int i=1; i<=d;i++)
+    {
+         for (int j=1; j<=d;j++)
+            {
+                if ((i!=d)||(j!=d))
+                {
+                      do
+                       {    sovpadeniy=false;
+                            random =1+rand() %Limit;
+                            
+                            for (int i1=1; i1<=d;i1++)
+                            { 
+                                 for (int j1=1; j1<=d;j1++)
+                                 {
+                                   if(board[i1][j1]==random)  
+                                    //   printf("%d = %d \n",board[i1][j1],random);
+                                     sovpadeniy=true;  
+                                 }
+                            }
+                        }while(sovpadeniy);
+                        
+                 board[i][j]=random;
+                }
+            }
+    }
 }
 
 /**
@@ -165,6 +196,20 @@ void init(void)
 void draw(void)
 {
     // TODO
+     for (int i=1; i<=d;i++)
+    {
+         for (int j=1; j<=d;j++)
+            {   
+                if (board[i][j]!=0)
+                {
+                    if(board[i][j]<10)
+                    printf(" %d ",board[i][j]);
+                    else printf("%d ",board[i][j]);
+                }
+                else printf(" _ ");
+            }
+            printf("\n");
+    }
 }
 
 /**
@@ -174,6 +219,214 @@ void draw(void)
 bool move(int tile)
 {
     // TODO
+    // 1 2 3
+    // 4 5 6
+    // 7 8 _
+      for (int i=1; i<=d;i++)
+    {
+         for (int j=1; j<=d;j++)
+            {   
+                if (board[i][j]==tile)
+                {
+                   
+                    if (((i+1)<=d)&&((j+1)<=d)&&((j-1)>=1)&&((i-1)>=1)) //element ne kasaetsya "stenok" matrici
+                    {
+                        if(board[i-1][j]==0)
+                        {
+                            board[i-1][j]=tile;
+                            board[i][j]=0;
+                            return true;
+                        }
+                        
+                        if(board[i+1][j]==0)
+                        {
+                            board[i+1][j]=tile;
+                            board[i][j]=0;
+                             return true;
+                        }
+                        
+                        if(board[i][j+1]==0)
+                        {
+                            board[i][j+1]=tile;
+                            board[i][j]=0;
+                             return true;
+                        }
+                            
+                        if(board[i][j-1]==0)
+                        {
+                            board[i][j-1]=tile;
+                            board[i][j]=0;
+                             return true;
+                        }
+                    }
+                    
+                     if ((i==1)&&(j==1)) //pervuy element mesiva
+                    {
+                        if(board[i+1][j]==0)
+                        {
+                            board[i+1][j]=tile;
+                            board[i][j]=0;
+                             return true;
+                        }
+                        
+                        if(board[i][j+1]==0)
+                        {
+                            board[i][j+1]=tile;
+                            board[i][j]=0;
+                             return true;
+                        }
+                    }
+                       
+                        if ((i==d)&&(j==d)) //posledniy element mesiva
+                    {
+                        if(board[i-1][j]==0)
+                        {
+                            board[i-1][j]=tile;
+                            board[i][j]=0;
+                            return true;
+                        }
+                        
+                        if(board[i][j-1]==0)
+                        {
+                            board[i][j-1]=tile;
+                            board[i][j]=0;
+                             return true;
+                        }
+                    }
+                    
+                   if ((i==1)&&(j==d)) //pravuy verhniy ygol
+                    {
+                        if(board[i+1][j]==0)
+                        {
+                            board[i+1][j]=tile;
+                            board[i][j]=0;
+                             return true;
+                        }
+                        
+                        if(board[i][j-1]==0)
+                        {
+                            board[i][j-1]=tile;
+                            board[i][j]=0;
+                             return true;
+                        }
+                    }
+                    
+                     if ((i==d)&&(j==1))//nigniy levuy ygol
+                    {
+                        if(board[i-1][j]==0)
+                        {
+                            board[i-1][j]=tile;
+                            board[i][j]=0;
+                            return true;
+                        }
+                        
+                        if(board[i][j+1]==0)
+                        {
+                            board[i][j+1]=tile;
+                            board[i][j]=0;
+                             return true;
+                        }
+                    }
+                    
+                 if ((i==1)&&(j>1)&&(j<d)) //pervoya stroka, ne vozle kraya
+                    {
+                        if(board[i+1][j]==0)
+                        {
+                            board[i+1][j]=tile;
+                            board[i][j]=0;
+                             return true;
+                        }
+                        
+                        if(board[i][j+1]==0)
+                        {
+                            board[i][j+1]=tile;
+                            board[i][j]=0;
+                             return true;
+                        }
+                            
+                        if(board[i][j-1]==0)
+                        {
+                            board[i][j-1]=tile;
+                            board[i][j]=0;
+                             return true;
+                        }
+                    }
+                    
+                   if ((i==d)&&(j>1)&&(j<d))//poslednya stroka, ne vozle kraya
+                    {
+                        if(board[i-1][j]==0)
+                        {
+                            board[i-1][j]=tile;
+                            board[i][j]=0;
+                            return true;
+                        }
+                        
+                        if(board[i][j+1]==0)
+                        {
+                            board[i][j+1]=tile;
+                            board[i][j]=0;
+                             return true;
+                        }
+                            
+                        if(board[i][j-1]==0)
+                        {
+                            board[i][j-1]=tile;
+                            board[i][j]=0;
+                             return true;
+                        }
+                    }  
+                    
+                     if ((j==1)&&(i>1)&&(i<d)) //levuy krayniy element
+                    {
+                        if(board[i-1][j]==0)
+                        {
+                            board[i-1][j]=tile;
+                            board[i][j]=0;
+                            return true;
+                        }
+                        
+                        if(board[i+1][j]==0)
+                        {
+                            board[i+1][j]=tile;
+                            board[i][j]=0;
+                             return true;
+                        }
+                        
+                        if(board[i][j+1]==0)
+                        {
+                            board[i][j+1]=tile;
+                            board[i][j]=0;
+                             return true;
+                        }
+                    }
+                   
+                    if ((j==d)&&(i>1)&&(i<d)) //element pravuy kray
+                    {
+                        if(board[i-1][j]==0)
+                        {
+                            board[i-1][j]=tile;
+                            board[i][j]=0;
+                            return true;
+                        }
+                        
+                        if(board[i+1][j]==0)
+                        {
+                            board[i+1][j]=tile;
+                            board[i][j]=0;
+                             return true;
+                        }
+                        
+                        if(board[i][j-1]==0)
+                        {
+                            board[i][j-1]=tile;
+                            board[i][j]=0;
+                             return true;
+                        }
+                    } 
+                   
+                }
+            }
+    }
     return false;
 }
 
@@ -184,5 +437,17 @@ bool move(int tile)
 bool won(void)
 {
     // TODO
-    return false;
+    int znachenie=d*d-1;
+
+    for (int i=1; i<=d;i++)
+    {
+         for (int j=1; j<=d;j++)
+            {   
+                if (board[i][j]!=znachenie)
+                    return false;
+                
+                znachenie--;
+            }
+    }
+    return true;
 }

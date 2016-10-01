@@ -21,17 +21,17 @@
 
 int main(int argc, string argv[])
 {
-    // TODO: comment me
+    // If  argc<2 or argc>3
     if (argc != 2 && argc != 3)
     {
         printf("Usage: ./generate n [s]\n");
         return 1;
     }
 
-    // TODO: comment me
+    // v n zapis 1y argument
     int n = atoi(argv[1]);
 
-    // TODO: comment me
+    // ecli ect' semya dly randoma ili vremya berem za semya
     if (argc == 3)
     {
         srand48((long) atoi(argv[2]));
@@ -41,7 +41,7 @@ int main(int argc, string argv[])
         srand48((long) time(NULL));
     }
 
-    // TODO: comment me
+    // vuvodim random chisla - kolichestvo s 1go argumenta berem 
     for (int i = 0; i < n; i++)
     {
         printf("%i\n", (int) (drand48() * LIMIT));

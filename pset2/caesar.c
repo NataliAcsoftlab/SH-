@@ -49,6 +49,6 @@ for(int i=0;i<strlen(str);i++)
   }
 }
 
-printf("ciphertext:   %s\n",str);
+printf("ciphertext:  %s\n",str);
 return 0;
 }
