@@ -17,4 +17,5 @@ string str=get_string();
         printf("%c",str[r]);
       }
    }
+   printf("\n");
 }

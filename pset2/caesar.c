@@ -14,7 +14,7 @@ int main (int argc, char** argv)
    return 1;
  }
  
-if (((int)(argv[1]))<0)
+if ((atoi(argv[1]))<0)
 {
   printf("Vedene vid'emne chislo"); 
   return 1;
@@ -26,7 +26,7 @@ else
      k = (int)atoi(argv[1]);
      
 
-printf("Plaintext:   ");
+printf("plaintext:   ");
 string str=get_string();
 
 for(int i=0;i<strlen(str);i++)
