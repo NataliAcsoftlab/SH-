@@ -11,7 +11,14 @@ int main(int argc, char *argv[])
     // remember filenames
     char *infile = argv[1];
     char *outfile = argv[2];
-
+    
+     // ensure proper usage
+    if (argc != 3)
+    {
+        printf("Usage: ./whodunit infile outfile\n");
+        return 1;
+    }
+    
     // open input file 
     FILE *inptr = fopen(infile, "r");
     if (inptr == NULL)
@@ -70,7 +77,7 @@ int main(int argc, char *argv[])
             // read RGB triple from infile
             fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
             
-            // zamena pixeley 
+            // zamena pixeley &&&&&&&&&&&&&&&&&&
             if ((triple.rgbtRed==0xFF)&&(triple.rgbtBlue==0x00)&&(triple.rgbtGreen==0x00))
             {
                 triple.rgbtRed=0x00;
