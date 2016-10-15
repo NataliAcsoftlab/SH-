@@ -1,1 +1,21 @@
-{"filter":false,"title":"initials.c","tooltip":"/pset2/initials.c","undoManager":{"mark":-1,"position":-1,"stack":[]},"ace":{"folds":[],"scrolltop":0,"scrollleft":0,"selection":{"start":{"row":19,"column":16},"end":{"row":19,"column":16},"isBackwards":false},"options":{"guessTabSize":true,"useWrapMode":false,"wrapToView":true},"firstLineState":{"row":27,"mode":"ace/mode/c_cpp"}},"timestamp":1475578510857,"hash":"c27ee7c2cf1c402a418190ab5f11a256b456173a"}
+#include <cs50.h>
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main (void)
+{
+string str=get_string();
+
+    for(int r=0; r<strlen(str); r++) 
+    {
+      if(((str[r-1]==' ')||(r==0))&&(str[r]!=' '))
+      {
+          if(str[r]>='a'&&str[r]<='z')
+        printf("%c",str[r]-=32); //po kody ASCII tabl otnimau esli malenkaya bykva
+        else 
+        printf("%c",str[r]);
+      }
+   }
+   printf("\n");
+}

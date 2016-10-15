@@ -1,1 +1,52 @@
-{"filter":false,"title":"generate.c","tooltip":"/pset3/find/generate.c","undoManager":{"mark":-1,"position":-1,"stack":[]},"ace":{"folds":[],"scrolltop":403,"scrollleft":0,"selection":{"start":{"row":13,"column":0},"end":{"row":13,"column":17},"isBackwards":true},"options":{"guessTabSize":true,"useWrapMode":false,"wrapToView":true},"firstLineState":{"row":27,"state":"start","mode":"ace/mode/c_cpp"}},"timestamp":1474989330019,"hash":"5366bad0a75ab35d454ed9ee37da1be2d0aceeff"}
+/**
+ * generate.c
+ *
+ * Generates pseudorandom numbers in [0,MAX), one per line.
+ *
+ * Usage: generate n [s]
+ *
+ * where n is number of pseudorandom numbers to print
+ * and s is an optional seed
+ */
+ 
+#define _XOPEN_SOURCE
+
+#include <cs50.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+// upper limit on range of integers that can be generated
+#define LIMIT 65536
+
+int main(int argc, string argv[])
+{
+    // If  argc<2 or argc>3
+    if (argc != 2 && argc != 3)
+    {
+        printf("Usage: ./generate n [s]\n");
+        return 1;
+    }
+
+    // v n zapis 1y argument
+    int n = atoi(argv[1]);
+
+    // ecli ect' semya dly randoma ili vremya berem za semya
+    if (argc == 3)
+    {
+        srand48((long) atoi(argv[2]));
+    }
+    else
+    {
+        srand48((long) time(NULL));
+    }
+
+    // vuvodim random chisla - kolichestvo s 1go argumenta berem 
+    for (int i = 0; i < n; i++)
+    {
+        printf("%i\n", (int) (drand48() * LIMIT));
+    }
+
+    // success
+    return 0;
+}

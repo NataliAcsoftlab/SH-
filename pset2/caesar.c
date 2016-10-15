@@ -1,1 +1,54 @@
-{"filter":false,"title":"caesar.c","tooltip":"/pset2/caesar.c","ace":{"folds":[],"scrolltop":116,"scrollleft":0,"selection":{"start":{"row":28,"column":9},"end":{"row":28,"column":9},"isBackwards":false},"options":{"guessTabSize":true,"useWrapMode":false,"wrapToView":true},"firstLineState":{"row":27,"state":"start","mode":"ace/mode/c_cpp"}},"hash":"6caa8e1e311a557863cdcea849c10257c1cfb3b5","undoManager":{"mark":-1,"position":-1,"stack":[]},"timestamp":1475593290000}
+#include <cs50.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+
+
+int main (int argc, char** argv)
+{
+    int k;
+ if (argc!=2) //proverka na k-vo argv
+ {
+   printf("Usage: ./caesar k\n");
+   return 1;
+ }
+ 
+if ((atoi(argv[1]))<0)
+{
+  printf("Vedene vid'emne chislo"); 
+  return 1;
+}
+
+if (atoi(argv[1])>26)  //esli >26 -> vuchislayem poziciu
+     k=(int)atoi(argv[1])%26;
+else
+     k = (int)atoi(argv[1]);
+     
+
+printf("plaintext:   ");
+string str=get_string();
+
+for(int i=0;i<strlen(str);i++)
+{
+  
+  if ((str[i]>='a')&&(str[i]<='z'))
+  {
+     if ((str[i]+k)>'z')
+         str[i]=(int)('a')+(k-((int)('z')-str[i]))-1; //esli zakonchilsya alfavit -> nachinaem snachala shitat'
+     else   
+         str[i]+=k;
+  }
+  
+   if ((str[i]>='A')&&(str[i]<='Z'))
+  {
+     if ((str[i]+k)>'Z')
+         str[i]=(int)('A')+(k-((int)('Z')-str[i]))-1;//esli zakonchilsya alfavit -> nachinaem snachala shitat'
+     else
+         str[i]+=k;
+  }
+}
+
+printf("ciphertext:  %s\n",str);
+return 0;
+}

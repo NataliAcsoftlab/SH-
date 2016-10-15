@@ -1,1 +1,71 @@
-{"filter":false,"title":"mario.c","tooltip":"/pset1/mario.c","undoManager":{"mark":-1,"position":-1,"stack":[]},"ace":{"folds":[],"scrolltop":126,"scrollleft":0,"selection":{"start":{"row":66,"column":5},"end":{"row":66,"column":5},"isBackwards":false},"options":{"guessTabSize":true,"useWrapMode":false,"wrapToView":true},"firstLineState":{"row":8,"state":"start","mode":"ace/mode/c_cpp"}},"timestamp":1475597347860,"hash":"57c82bee4c9f8fab7a8c1b07faf44cf52bacc7d0"}
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+#include <stdbool.h>
+#include <math.h>
+#include <cs50.h>
+
+int main (void)
+{
+  char mas[100]={0};
+  int vusota=0;
+  int num=0;
+
+   do 
+   {
+       if (vusota <= 0 || vusota >= 24)
+       {
+           printf("Height ot 1 do 23: ");
+           vusota=GetInt();
+       }
+       else
+        { 
+         
+            vusota = GetInt();
+        }  
+        
+         if (vusota==0)
+                return 0;
+                
+     } while ((vusota<=0)||(vusota>23));
+     
+
+
+     for (int i=1; i<=vusota; i++)
+     { 
+        	for(int j=vusota;j>i;j--) 
+        	{
+        	    mas[num]=' ';
+        	    num++;
+        	}
+    
+    		for (int a=0;a<i;a++)
+    		{
+    		    mas[num]='#';
+    		    num++;
+    		}
+    		
+    		mas[num]=' ';
+    		num++;
+    		
+    		mas[num]=' ';
+    		num++;
+    		
+    		for (int a=0;a<i;a++)
+    		{
+    		    mas[num]='#';
+    		    num++;
+    		}
+    
+    // 		for(int i1=0;i1<strlen(mas);i1++)
+    //         	printf("%c",mas[i1]);
+    	        
+    // 	        printf("\n");
+    	puts(mas);
+    	num=0;
+    	
+      }
+   
+
+}
