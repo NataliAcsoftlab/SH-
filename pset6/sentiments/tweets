@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+
+import sys
+from twython import Twython # pip install twython
+
+from analyzer import Analyzer
+from termcolor import colored
+
+
+# TODO
+
+def main():
+
+    if len(sys.argv) != 2:
+            sys.exit("Usage: ./tweets @screen_name")
+            
+    analyzer = Analyzer()
+    
+    APP_KEY='mHn7kQfLnNuGBVRcB8x9Q6gM7'
+    APP_SECRET='9TB7O0ZWbJGOvjdO2cjuwMApSERr4N6u39azmYmoiNB60AmaX1'
+    OAUTH_TOKEN='795296997964136449-WfgHEL1zygON7YNMhT0LlkwpYVTrxsr'
+    OAUTH_TOKEN_SECRET='q0GK2fstDIu5SlsdjhLkD1jiMd5cXr91ULW4kLQ4qMTOW'
+    
+    twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
+    
+    
+    try:
+        search_results = twitter.search(q=sys.argv[1], count=100)
+    except TwythonError as e:
+        print (e)
+    
+    for tweet in search_results['statuses']:
+        
+        score = analyzer.analyze(tweet['text'])
+        
+        if score > 0.0:
+            print(colored(str(score) + ' ' + tweet['text'], "green"), '\n')
+        elif score < 0.0:
+            print(colored(str(score) + ' ' + tweet['text'], "red"), '\n')
+        else:
+            print(colored(str(score) + ' ' + tweet['text'], "yellow"), '\n')
+
+
+if __name__ == "__main__":
+    main()
