@@ -124,15 +124,20 @@ unsigned int size(void)
 bool unload(void)
 {
     Node *root=Head;
-
+    Node *root2;
+    sizeST=size(); 
     int COUNT=0, sizeST=0;
+    
+  
          while (root!=NULL)
          {   
-           free(root);
+             root2=root->next;
+             free(root);
             COUNT++;
-            root=root->next;
+            root=root2;
+            
          }
-        sizeST=size(); 
+        
         if (COUNT==sizeST)
             return true;
     return false;

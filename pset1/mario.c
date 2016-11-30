@@ -21,7 +21,6 @@ int main (void)
        }
        else
         { 
-         
             vusota = GetInt();
         }  
         
