@@ -12,6 +12,7 @@ int main (void)
   int vusota=0;
   int num=0;
 
+
    do 
    {
        if (vusota <= 0 || vusota >= 24)
